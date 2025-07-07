@@ -1,0 +1,14 @@
+### Test Login API
+POST http://localhost:5145/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@mapsterevents.com",
+  "password": "Admin123!"
+}
+
+### Test Health Endpoint
+GET http://localhost:5145/health
+
+### Test Categories Endpoint
+GET http://localhost:5145/api/categories

@@ -1,0 +1,217 @@
+<!-- Premium Event List Page -->
+<div class="event-list-wrapper">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="page-header">
+      <h1 class="page-title">Etkinlikler</h1>
+      <p class="page-subtitle">Yaklaşan ve geçmiş etkinlikleri keşfedin</p>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="filters-section">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="searchForm" class="filter-form">
+            <div class="row">
+              <!-- Search Input -->
+              <div class="col-lg-4 col-md-6 mb-3">
+                <label for="searchTerm" class="form-label">
+                  <i class="bi bi-search me-2"></i>
+                  Arama
+                </label>
+                <input
+                  type="text"
+                  id="searchTerm"
+                  formControlName="searchTerm"
+                  class="form-control"
+                  placeholder="Etkinlik, konum ara...">
+              </div>
+
+              <!-- Category Filter -->
+              <div class="col-lg-3 col-md-6 mb-3">
+                <label for="categoryId" class="form-label">
+                  <i class="bi bi-tags me-2"></i>
+                  Kategori
+                </label>
+                <select
+                  id="categoryId"
+                  formControlName="categoryId"
+                  class="form-select">
+                  <option value="">Tüm Kategoriler</option>
+                  <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Status Filter -->
+              <div class="col-lg-3 col-md-6 mb-3">
+                <label for="status" class="form-label">
+                  <i class="bi bi-calendar me-2"></i>
+                  Durum
+                </label>
+                <select
+                  id="status"
+                  formControlName="status"
+                  class="form-select">
+                  <option value="all">Tüm Etkinlikler</option>
+                  <option value="upcoming">Yaklaşan</option>
+                  <option value="past">Geçmiş</option>
+                </select>
+              </div>
+
+              <!-- Clear Filters Button -->
+              <div class="col-lg-2 col-md-6 mb-3">
+                <label class="form-label">&nbsp;</label>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary w-100"
+                  (click)="clearFilters()">
+                  <i class="bi bi-x-circle me-2"></i>
+                  Temizle
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Summary -->
+    <div class="results-summary">
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="results-count">
+          <strong>{{ totalItems }}</strong> etkinlik bulundu
+        </span>
+        <div class="view-options">
+          <button
+            class="btn btn-sm btn-outline-primary"
+            [class.active]="itemsPerPage === 6"
+            (click)="itemsPerPage = 6; applyFilters()">
+            6
+          </button>
+          <button
+            class="btn btn-sm btn-outline-primary"
+            [class.active]="itemsPerPage === 9"
+            (click)="itemsPerPage = 9; applyFilters()">
+            9
+          </button>
+          <button
+            class="btn btn-sm btn-outline-primary"
+            [class.active]="itemsPerPage === 12"
+            (click)="itemsPerPage = 12; applyFilters()">
+            12
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="events-grid" *ngIf="!isLoading && pagedEvents.length > 0">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let event of pagedEvents">
+          <div class="event-card" (click)="viewEventDetail(event.id)">
+            <div class="event-image">
+              <img 
+                [src]="event.imageUrl || getDefaultImageForEvent(event.title)" 
+                [alt]="event.title" 
+                loading="lazy"
+                (error)="onImageError($event, event.title)">
+              <div class="event-date">
+                <span class="date-day">{{ event.date | date:'dd' }}</span>
+                <span class="date-month">{{ event.date | date:'MMM' }}</span>
+              </div>
+              <div class="event-status" [class.upcoming]="isUpcoming(event.date)">
+                {{ isUpcoming(event.date) ? 'Yaklaşan' : 'Geçmiş' }}
+              </div>
+            </div>
+            <div class="event-content">
+              <div class="event-category">
+                <i class="bi bi-tag me-1"></i>
+                {{ event.categoryName }}
+              </div>
+              <h3 class="event-title">{{ event.title }}</h3>
+              <p class="event-description">{{ event.shortDescription }}</p>
+              <div class="event-meta">
+                <div class="meta-item">
+                  <i class="bi bi-geo-alt"></i>
+                  <span>{{ event.location }}</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-person"></i>
+                  <span>{{ event.organizerName }}</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-people"></i>
+                  <span>{{ event.participantCount }} Katılımcı</span>
+                </div>
+              </div>
+            </div>
+            <div class="event-footer">
+              <span class="event-date-full">
+                {{ formatDate(event.date) }}
+              </span>
+              <button class="btn btn-sm btn-primary">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!isLoading && pagedEvents.length === 0">
+      <div class="empty-icon">
+        <i class="bi bi-calendar-x"></i>
+      </div>
+      <h3>Etkinlik bulunamadı</h3>
+      <p>Arama kriterlerinize uygun etkinlik bulunamadı. Filtreleri değiştirerek tekrar deneyin.</p>
+      <button class="btn btn-primary" (click)="clearFilters()">
+        <i class="bi bi-arrow-clockwise me-2"></i>
+        Filtreleri Temizle
+      </button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-section" *ngIf="totalPages > 1">
+      <nav aria-label="Etkinlik sayfalama">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button 
+              class="page-link"
+              (click)="navigateToPage(currentPage - 1)"
+              [disabled]="currentPage === 1">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+          </li>
+          
+          <li 
+            class="page-item" 
+            *ngFor="let page of pageNumbers"
+            [class.active]="page === currentPage">
+            <button 
+              class="page-link"
+              (click)="navigateToPage(page)">
+              {{ page }}
+            </button>
+          </li>
+          
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button 
+              class="page-link"
+              (click)="navigateToPage(currentPage + 1)"
+              [disabled]="currentPage === totalPages">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="loading-spinner"></div>
+</div> 

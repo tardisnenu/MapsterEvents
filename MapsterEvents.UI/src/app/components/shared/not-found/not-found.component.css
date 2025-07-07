@@ -1,0 +1,70 @@
+/* Not Found Styles */
+.not-found-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--light-gray) 0%, var(--primary-white) 100%);
+}
+
+.not-found-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.error-code {
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--medium-gray);
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.not-found-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+}
+
+.not-found-content p {
+  font-size: 1.1rem;
+  color: var(--medium-gray);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+  .error-code {
+    font-size: 6rem;
+  }
+  
+  .not-found-content h1 {
+    font-size: 2rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .action-buttons .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+} 

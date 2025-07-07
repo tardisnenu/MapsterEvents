@@ -1,0 +1,226 @@
+<!-- Premium Home Page -->
+<div class="home-wrapper">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-6">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              <span class="title-line">Etkinlik Dünyasına</span>
+              <span class="title-line highlight">Hoş Geldiniz</span>
+            </h1>
+            <p class="hero-subtitle">
+              MapsterEvents ile en özel etkinlikleri keşfedin, organize edin ve unutulmaz anlar yaşayın. 
+              Her an, her yerde, her etkinlik burada!
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg me-3" (click)="createEvent()">
+                <i class="bi bi-plus-circle me-2"></i>
+                Etkinlik Oluştur
+              </button>
+              <a routerLink="/events" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-search me-2"></i>
+                Etkinlikleri Keşfet
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-visual">
+            <div class="hero-card">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-date">
+                    <span class="day">15</span>
+                    <span class="month">ARA</span>
+                  </div>
+                  <div class="card-info">
+                    <h3>Teknoloji Zirvesi 2024</h3>
+                    <p><i class="bi bi-geo-alt me-1"></i>İstanbul, Türkiye</p>
+                  </div>
+                </div>
+                <div class="card-stats">
+                  <div class="stat">
+                    <i class="bi bi-people"></i>
+                    <span>1,250 Katılımcı</span>
+                  </div>
+                  <div class="stat">
+                    <i class="bi bi-heart"></i>
+                    <span>4.9 Puan</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-indicator" (click)="scrollToNextSection()">
+        <i class="bi bi-chevron-down"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="bi bi-calendar-event"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number">{{ stats.totalEvents }}+</h3>
+              <p class="stat-label">Aktif Etkinlik</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="bi bi-people"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number">{{ stats.totalUsers }}+</h3>
+              <p class="stat-label">Kayıtlı Kullanıcı</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="bi bi-tags"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number">{{ stats.totalCategories }}+</h3>
+              <p class="stat-label">Farklı Kategori</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="bi bi-bookmark-check"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number">{{ stats.totalRegistrations }}+</h3>
+              <p class="stat-label">Toplam Kayıt</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Events Section -->
+  <section class="featured-events" *ngIf="featuredEvents.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Öne Çıkan Etkinlikler</h2>
+        <p class="section-subtitle">En popüler ve yaklaşan etkinlikleri keşfedin</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let event of featuredEvents">
+          <div class="event-card" (click)="navigateToEvent(event.id)">
+            <div class="event-image">
+              <img [src]="event.imageUrl || '/assets/images/event-placeholder.jpg'" 
+                   [alt]="event.title" 
+                   loading="lazy">
+              <div class="event-date">
+                <span class="date-day">{{ event.eventDate | date:'dd' }}</span>
+                <span class="date-month">{{ event.eventDate | date:'MMM' }}</span>
+              </div>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">{{ event.title }}</h3>
+              <p class="event-description">{{ event.description | slice:0:100 }}...</p>
+              <div class="event-meta">
+                <div class="meta-item">
+                  <i class="bi bi-geo-alt"></i>
+                  <span>{{ event.location }}</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-people"></i>
+                  <span>{{ event.registrationCount }} Katılımcı</span>
+                </div>
+              </div>
+              <div class="event-footer">
+                <span class="event-price">
+                  {{ event.price === 0 ? 'Ücretsiz' : event.price + ' ₺' }}
+                </span>
+                <button class="btn btn-sm btn-primary">
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-5">
+        <a routerLink="/events" class="btn btn-outline-primary btn-lg">
+          <i class="bi bi-collection me-2"></i>
+          Tüm Etkinlikleri Görüntüle
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section" *ngIf="categories.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Kategoriler</h2>
+        <p class="section-subtitle">İlginizi çeken kategorilerdeki etkinlikleri keşfedin</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let category of categories">
+          <div class="category-card" (click)="navigateToCategory(category.id)">
+            <div class="category-icon">
+              <span class="icon-emoji">{{ getCategoryIcon(category.name) }}</span>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">{{ category.name }}</h3>
+              <p class="category-description">{{ category.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="cta-title">Hayal Ettiğiniz Etkinliği Gerçekleştirin</h2>
+          <p class="cta-subtitle">
+            MapsterEvents ile kolayca etkinlik organize edin, katılımcılarla buluşun ve 
+            unutulmaz anılar yaratın. Hemen başlayın!
+          </p>
+          <div class="cta-actions">
+            <button class="btn btn-primary btn-lg me-3" (click)="createEvent()">
+              <i class="bi bi-plus-circle me-2"></i>
+              Etkinlik Oluştur
+            </button>
+            <button class="btn btn-outline-primary btn-lg" (click)="navigateToRegister()" *ngIf="!isAuthenticated">
+              <i class="bi bi-person-plus me-2"></i>
+              Ücretsiz Kaydol
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="loading-spinner"></div>
+</div>

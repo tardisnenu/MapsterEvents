@@ -1,0 +1,487 @@
+/* =======================
+   PREMIUM EVENT DETAIL STYLES
+   Created by Hamza Canturk
+   https://hamzacanturk.com/
+   ======================= */
+
+/* Page Layout */
+.event-detail-wrapper {
+  padding: 2rem 0;
+  background: linear-gradient(135deg, var(--light-gray) 0%, var(--primary-white) 100%);
+  min-height: 100vh;
+}
+
+/* Breadcrumb */
+.breadcrumb-nav {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item a {
+  color: var(--medium-gray);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary-black);
+}
+
+.breadcrumb-item.active {
+  color: var(--primary-black);
+  font-weight: 600;
+}
+
+/* Event Header */
+.event-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--medium-gray);
+  font-size: 1rem;
+}
+
+.meta-item i {
+  color: var(--primary-black);
+  font-size: 1.1rem;
+}
+
+.event-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+/* Event Content */
+.event-image-section {
+  margin-bottom: 3rem;
+}
+
+.event-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.event-description-section {
+  margin-bottom: 3rem;
+}
+
+.event-description-section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 1.5rem;
+}
+
+.event-description {
+  color: var(--dark-gray);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+/* Participants Section */
+.participants-section {
+  margin-bottom: 3rem;
+}
+
+.participants-section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 1.5rem;
+}
+
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.participant-card {
+  background: var(--primary-white);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all var(--transition-normal);
+}
+
+.participant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.participant-avatar {
+  font-size: 2.5rem;
+  color: var(--medium-gray);
+}
+
+.participant-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-black);
+}
+
+.participant-info small {
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+}
+
+/* Event Sidebar */
+.event-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.registration-card {
+  background: var(--primary-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.registration-card .card-header {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 1.5rem;
+}
+
+.registration-card .card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-black);
+}
+
+.registration-card .card-body {
+  padding: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-black), var(--soft-black));
+  color: var(--primary-white);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.info-content strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 0.25rem;
+}
+
+.info-content p {
+  margin: 0;
+  color: var(--medium-gray);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Registration Actions */
+.registration-actions {
+  margin-bottom: 2rem;
+}
+
+.registration-actions .btn {
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.registration-actions .btn-primary {
+  background: linear-gradient(135deg, var(--primary-black), var(--soft-black));
+  border: none;
+}
+
+.registration-actions .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--soft-black), var(--dark-gray));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.registration-actions .btn-outline-danger {
+  border: 2px solid var(--danger-red);
+  color: var(--danger-red);
+}
+
+.registration-actions .btn-outline-danger:hover:not(:disabled) {
+  background: var(--danger-red);
+  color: var(--primary-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.login-required {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.event-ended .alert {
+  border-radius: var(--radius-lg);
+  border: none;
+  font-weight: 600;
+}
+
+/* Loading and Error States */
+.loading-container,
+.error-container {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--primary-black);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.error-icon {
+  font-size: 4rem;
+  color: var(--medium-gray);
+  margin-bottom: 1.5rem;
+}
+
+.error-container h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+}
+
+.loading-spinner-sm {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid var(--primary-white);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Alert Styles */
+.alert {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  border-left: 4px solid var(--success-green);
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--success-green);
+}
+
+.alert-danger {
+  border-left: 4px solid var(--danger-red);
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--danger-red);
+}
+
+.alert-info {
+  border-left: 4px solid var(--info-cyan);
+  background: rgba(23, 162, 184, 0.1);
+  color: var(--info-cyan);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .event-title {
+    font-size: 2rem;
+  }
+  
+  .event-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .event-actions {
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+  
+  .event-sidebar {
+    position: static;
+    margin-top: 3rem;
+  }
+  
+  .event-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .event-detail-wrapper {
+    padding: 1rem 0;
+  }
+  
+  .event-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .event-title {
+    font-size: 1.75rem;
+  }
+  
+  .event-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .event-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .event-image {
+    height: 250px;
+  }
+  
+  .participants-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .registration-card .card-header,
+  .registration-card .card-body {
+    padding: 1.25rem;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .info-icon {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .event-title {
+    font-size: 1.5rem;
+  }
+  
+  .event-image {
+    height: 200px;
+  }
+  
+  .registration-card .card-header,
+  .registration-card .card-body {
+    padding: 1rem;
+  }
+  
+  .registration-actions .btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .participant-card,
+  .registration-actions .btn {
+    transition: none;
+  }
+  
+  .participant-card:hover,
+  .registration-actions .btn:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .registration-card,
+  .participant-card,
+  .login-required {
+    border: 2px solid var(--primary-black);
+  }
+}
+
+/* Print styles */
+@media print {
+  .event-actions,
+  .registration-actions,
+  .loading-container {
+    display: none;
+  }
+  
+  .event-sidebar {
+    position: static;
+  }
+} 

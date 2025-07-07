@@ -1,0 +1,128 @@
+<!-- Premium Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-premium fixed-top">
+  <div class="container">
+    <!-- Brand Logo -->
+    <a class="navbar-brand" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+      <i class="bi bi-calendar-event me-2"></i>
+      <span class="brand-text">MapsterEvents</span>
+    </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button 
+      class="navbar-toggler" 
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="navbarNav"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarNav">
+      <!-- Main Navigation Links -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-house me-1"></i>
+            Ana Sayfa
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/events" [routerLinkActive]="['active']">
+            <i class="bi bi-calendar-event me-1"></i>
+            Etkinlikler
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/my-events" [routerLinkActive]="['active']">
+            <i class="bi bi-person-badge me-1"></i>
+            Etkinliklerim
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/create-event" [routerLinkActive]="['active']">
+            <i class="bi bi-plus-circle me-1"></i>
+            Etkinlik Oluştur
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Actions -->
+      <ul class="navbar-nav">
+        <!-- Guest User Actions -->
+        <ng-container *ngIf="!isAuthenticated">
+          <li class="nav-item">
+            <a class="nav-link nav-link-login" routerLink="/login" [routerLinkActive]="['active']">
+              <i class="bi bi-box-arrow-in-right me-1"></i>
+              Giriş Yap
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-register" routerLink="/register" [routerLinkActive]="['active']">
+              <i class="bi bi-person-plus me-1"></i>
+              Kayıt Ol
+            </a>
+          </li>
+        </ng-container>
+
+        <!-- Authenticated User Actions -->
+        <ng-container *ngIf="isAuthenticated">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" 
+               href="#" 
+               id="navbarDropdown" 
+               role="button" 
+               data-bs-toggle="dropdown" 
+               aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              <span class="user-name">{{ currentUser?.fullName || 'Kullanıcı' }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" routerLink="/profile">
+                  <i class="bi bi-person me-2"></i>
+                  Profilim
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/my-events">
+                  <i class="bi bi-calendar-check me-2"></i>
+                  Etkinliklerim
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/settings">
+                  <i class="bi bi-gear me-2"></i>
+                  Ayarlar
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item logout-item" 
+                   href="#" 
+                   (click)="logout($event)"
+                   [class.disabled]="isLoading">
+                  <i class="bi bi-box-arrow-right me-2"></i>
+                  <span *ngIf="!isLoading">Çıkış Yap</span>
+                  <span *ngIf="isLoading">Çıkış yapılıyor...</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Navigation Overlay for Mobile -->
+<div class="nav-overlay" 
+     [class.show]="isMenuOpen"
+     (click)="toggleMenu()">
+</div>
+
+<!-- Loading Indicator -->
+<div *ngIf="isLoading" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="background: rgba(255,255,255,0.8); z-index: 9999;">
+  <div class="loading-spinner"></div>
+</div>
